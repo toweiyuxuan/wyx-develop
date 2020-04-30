@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<constant name="struts.devMode" value="false"></constant>
+	<constant name="struts.ui.theme" value="simple"></constant>
+	
+	<package name="basePack" extends="struts-default" abstract="true">
+		<interceptors>
+			<interceptor name="loginInterceptor" class="cn.wyx.interceptor.LoginInterceptor"></interceptor>
+			<interceptor-stack name="wyxStack">
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+				<interceptor-ref name="loginInterceptor"></interceptor-ref>
+			</interceptor-stack>
+		</interceptors>
+		<default-interceptor-ref name="wyxStack"></default-interceptor-ref>
+	</package>
+	
+	
+	<package name="wyx" extends="basePack">
+	
+		<!--jsps层页面跳转专用  -->
+		<action name="wyx_*">
+			<result name="success">/login.jsp</result>
+			<result name="none">/login.jsp</result>
+			<result name="error">/errors/error.jsp</result>
+		</action>
+				
+		<!-- AdminAction专用转发器-->
+		<action name="ajax_u_*" class="adminAction" method="ajax_u_{1}">
+			<interceptor-ref name="wyxStack">
+				<param name="loginInterceptor.excludeMethods">ajax_u_login,ajax_u_register,ajax_u_getImage,ajax_u_validRcode</param>
+			</interceptor-ref>
+			<result name="none" type="redirectAction">wyx_login</result>
+			<result name="login" type="redirectAction">wyx_login</result>
+		</action>
+		
+		<action name="main_*">
+			<result name="success">/WEB-INF/jsps/{1}.jsp</result>
+			<result name="none" type="redirectAction">wyx_login</result>
+		</action>
+		
+		<action name="article_*">
+			<result name="success">/WEB-INF/jsps/article/{1}.jsp</result>
+			<result name="none" type="redirectAction">wyx_login</result>
+		</action>
+		
+		<action name="column_*">
+			<result name="success">/WEB-INF/jsps/column/{1}.jsp</result>
+			<result name="none" type="redirectAction">wyx_login</result>
+		</action>
+		
+		<action name="friendlinks_*">
+			<result name="success">/WEB-INF/jsps/friendlinks/{1}.jsp</result>
+			<result name="none" type="redirectAction">wyx_login</result>
+		</action>
+		
+		<action name="other_*">
+			<result name="success">/WEB-INF/jsps/other/{1}.jsp</result>
+			<result name="none" type="redirectAction">wyx_login</result>
+		</action>
+		
+		<action name="picture_*">
+			<result name="success">/WEB-INF/jsps/picture/{1}.jsp</result>
+			<result name="none" type="redirectAction">wyx_login</result>
+		</action>
+		
+		<action name="single_*">
+			<result name="success">/WEB-INF/jsps/single/{1}.jsp</result>
+			<result name="none" type="redirectAction">wyx_login</result>
+		</action>
+		
+		<action name="user_*">
+			<result name="success">/WEB-INF/jsps/user/{1}.jsp</result>
+			<result name="none" type="redirectAction">wyx_login</result>
+		</action>
+		
+		<action name="webset_*">
+			<result name="success">/WEB-INF/jsps/webset/{1}.jsp</result>
+			<result name="none" type="redirectAction">wyx_login</result>
+		</action>
+		
+	</package>	
+</struts>

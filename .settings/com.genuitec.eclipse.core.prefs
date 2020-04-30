@@ -1,0 +1,3 @@
+eclipse.preferences.version=1
+validator.Checked=WebRoot/WEB-INF/jsps/dist/js/main.min.js,WebRoot/main/dist/js/main.min.js
+validator.Unchecked=
