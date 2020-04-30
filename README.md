@@ -5,4 +5,4 @@ SSH framework construction and CMS system page prototype.
 # start
 http://127.0.0.1:8080/wyx_develop/wyx_login
 # other
-Please contact [Wei Yuxuan](https://blog.csdn.net/qq_36260974) for database.
+Please contact [Wei Yuxuan](https://blog.csdn.net/qq_36260974) for detail.
